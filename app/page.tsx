@@ -1,4 +1,5 @@
 import ChessBoard from "@/components/board/ChessBoard";
+import { ChessBoardProvider } from "@/components/board/context";
 import FlexBreak from "@/components/FlexBreak";
 
 export default function Home() {
@@ -6,7 +7,9 @@ export default function Home() {
     <main className="flex justify-center items-center flex-wrap">
       <h1 className="my-8 font-bold text-xl">Chess Repertoire Builder</h1>
       <FlexBreak />
-      <ChessBoard />
+      <ChessBoardProvider>
+        <ChessBoard />
+      </ChessBoardProvider>
     </main>
   );
 }

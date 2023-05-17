@@ -13,20 +13,28 @@ import blackQueen from "../../public/queen-b.svg";
 import whiteQueen from "../../public/queen-w.svg";
 import blackKing from "../../public/king-b.svg";
 import whiteKing from "../../public/king-w.svg";
+import { useChessBoard } from "./context";
 
 interface Props {
   square: Square;
 }
 
 const ChessSquare: React.FC<Props> = (props: Props) => {
+  const { selectedSquare, setSelectedSquare } = useChessBoard();
   const { square } = props;
   const { file, rank, piece } = square;
 
   const getColorClass = (): string => {
-    if ((file + rank) % 2 == 1) {
-      return "bg-[#eeeed2]";
+    const isLightSquare = (file + rank) % 2 == 1;
+    const isSelectedSquare = getSquareName() === selectedSquare;
+    if (isLightSquare) {
+      return isSelectedSquare ? "bg-[#f7f769]" : "bg-[#eeeed2]";
     }
-    return "bg-[#769656]";
+    return isSelectedSquare ? "bg-[#bbcb2b]" : "bg-[#769656]";
+  };
+
+  const getSquareName = (): string => {
+    return `${File[file]}${rank}`;
   };
 
   const getPieceImage = (): React.ReactNode => {
@@ -82,8 +90,11 @@ const ChessSquare: React.FC<Props> = (props: Props) => {
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(`${File[file]}${rank}`);
+  const handleClick = (): void => {
+    if (!piece) {
+      return;
+    }
+    setSelectedSquare(selectedSquare ? null : getSquareName());
   };
 
   return (

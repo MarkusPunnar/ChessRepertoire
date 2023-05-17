@@ -1,12 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { ChessBoard, STARTING_BOARD } from "./board";
 import groupBy from "lodash.groupby";
 import BoardRow from "./BoardRow";
+import { useChessBoard } from "./context";
 
 const ChessBoard: React.FC<{}> = () => {
-  const [board, setBoard] = React.useState<ChessBoard>(STARTING_BOARD);
+  const { board } = useChessBoard();
   const squaresByFile = groupBy(board.squares, "file");
   return (
     <>
