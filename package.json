@@ -2,6 +2,11 @@
   "name": "chess-repertoire",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18",
+    "yarn": ">=3.5",
+    "npm": "please-use-yarn"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -25,5 +30,6 @@
   },
   "devDependencies": {
     "@types/lodash.groupby": "^4.6.7"
-  }
+  },
+  "packageManager": "yarn@3.5.1"
 }
